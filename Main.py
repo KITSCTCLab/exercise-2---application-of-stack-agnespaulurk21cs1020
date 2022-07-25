@@ -56,7 +56,8 @@ class Evaluate:
       True if the expression is valid, else returns False.
     """
     operators=['+','-','*','/']
-    count,digitcount=0
+    count=0
+    digitcount=0
     for character in expression:
       if character in operators:
         count+=1
