@@ -97,7 +97,7 @@ class Evaluate:
         a=sta.pop()
         b=sta.pop()
         sta.append(int(a)/int(b))
-     return (sta.pop())
+     return sta.pop()
 
 # Do not change the following code
 postfix_expression = input()  # Read postfix expression
