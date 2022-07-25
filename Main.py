@@ -5,7 +5,7 @@ class Evaluate:
       size_of_stack: An integer which represents the size of stack.
       stack: A List which acts as a Stack.
   """
-    # Write your code here
+    
 
 
   def __init__(self, size):
@@ -19,12 +19,13 @@ class Evaluate:
 
 
   def isEmpty(self):
+    
     """
     Check whether the stack is empty.
     Returns:
       True if it is empty, else returns False.
     """
-      # Write your code here
+    return len(self.stack)==0 
 
 
   def pop(self):
@@ -33,7 +34,8 @@ class Evaluate:
     Returns:
       The data which is popped out if the stack is not empty.
     """
-    # Write your code here
+    if not self.isEmpty():
+      self.stack.pop(-1)
 
 
   def push(self, operand):
@@ -42,7 +44,7 @@ class Evaluate:
     Arguments:
       operand: The operand to be pushed.
     """
-    # Write your code here
+    self.stack.append(operations)
 
 
   def validate_postfix_expression(self, expression):
@@ -53,8 +55,17 @@ class Evaluate:
     Returns:
       True if the expression is valid, else returns False.
     """
-    # Write your code here
-
+    operators=['+','-','*','/']
+    count,digitcount=0
+    for character in expression:
+      if character in operators:
+        count+=1
+      elif character.isdigit():
+        digitcount+=1
+      else:
+        return False
+    if count<digitcount:
+      return True
 
   def evaluate_postfix_expression(self, expression):
     """
@@ -64,8 +75,29 @@ class Evaluate:
     Returns:
       The result of evaluated postfix expression.
     """
-    # Write your code here
-
+    str=list(self.expression)
+    n=len(str)
+    sta=[]
+    for i in range(n):
+      if str[i].isdigit():
+        sta.append(int(str[i]))
+      elif str[i]=='+':
+        a=sta.pop()
+        b=sta.pop()
+        sta.append(int(a)+int(b))
+      elif str[i]=='-':
+        a=sta.pop()
+        b=sta.pop()
+        sta.append(int(a)-int(b))
+      elif str[i]=='*':
+        a=sta.pop()
+        b=sta.pop()
+        sta.append(int(a)*int(b))
+      elif str[i]=='/':
+        a=sta.pop()
+        b=sta.pop()
+        sta.append(int(a)/int(b))
+     return (sta.pop())
 
 # Do not change the following code
 postfix_expression = input()  # Read postfix expression
