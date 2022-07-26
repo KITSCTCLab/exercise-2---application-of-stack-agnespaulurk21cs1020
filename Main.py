@@ -59,17 +59,14 @@ class Evaluate:
     Returns:
       True if the expression is valid, else returns False.
     """
-    operators=['+','-','*','/']
-    count=0
-    digitcount=0
-    for character in expression:
-      if character in operators:
-        count+=1
-      elif character.isnumeric():
-        digitcount+=1
+    nums = 0
+    ops = 0
+    for element in expression:
+      if element.isnumeric():
+        nums = nums + 1
       else:
-        return False
-    if count<digitcount:
+        ops = ops + 1
+    if ops == nums - 1:
       return True
     else:
       return False
