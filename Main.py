@@ -14,7 +14,7 @@ class Evaluate:
       size_of_stack: An integer to set the size of stack.
     """
     self.top = -1
-    self.size_of_stack =size
+    self.size_of_stack = size
     self.stack = []
 
 
@@ -47,7 +47,7 @@ class Evaluate:
     Arguments:
       operand: The operand to be pushed.
     """
-   if self.top != self.size_of_stack - 1:
+    if self.top != self.size_of_stack - 1:
       self.stack.append(operand)
 
 
