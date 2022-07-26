@@ -61,12 +61,14 @@ class Evaluate:
     for character in expression:
       if character in operators:
         count+=1
-      elif character.isdigit():
+      elif character.isnumeric():
         digitcount+=1
       else:
         return False
     if count<digitcount:
       return True
+    else:
+      return False
 
   def evaluate_postfix_expression(self, expression):
     """
@@ -76,29 +78,27 @@ class Evaluate:
     Returns:
       The result of evaluated postfix expression.
     """
-    str=list(self.expression)
-    n=len(str)
-    sta=[]
-    for i in range(n):
-      if str[i].isdigit():
-        sta.append(int(str[i]))
-      elif str[i]=='+':
-        a=sta.pop()
-        b=sta.pop()
-        sta.append(int(a)+int(b))
-      elif str[i]=='-':
-        a=sta.pop()
-        b=sta.pop()
-        sta.append(int(a)-int(b))
-      elif str[i]=='*':
-        a=sta.pop()
-        b=sta.pop()
-        sta.append(int(a)*int(b))
-      elif str[i]=='/':
-        a=sta.pop()
-        b=sta.pop()
-        sta.append(int(a)/int(b))
-    return sta.pop()
+    stack = []
+    for i in expression:
+      if i.isnumeric():
+        stack.append(int(i))
+      if len(stack) >= 2:
+        if i == '+':
+          stack[-2] = stack[-2] + stack[-1]
+          stack.pop()
+        elif i == '-':
+          stack[-2] = stack[-2] - stack[-1]
+          stack.pop()
+        elif i == '*':
+          stack[-2] = stack[-2] * stack[-1]
+          stack.pop()
+        elif i == '/':
+          stack[-2] = stack[-2] / stack[-1]
+          stack.pop()
+        elif i == '^':
+          stack[-2] = stack[-2] ^ stack[-1]
+          stack.pop()
+    return int(stack[-1])
 
 # Do not change the following code
 postfix_expression = input()  # Read postfix expression
